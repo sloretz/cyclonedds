@@ -555,8 +555,11 @@ send_error_to_retcode(int errnum)
       return DDS_RETCODE_IN_PROGRESS;
     case WSAEFAULT: /* A parameter was not part of the user address space or
                        destination address was to small (WSASendTo). */
+      DDS_WARNING("slortez: WSAEFAULT");
     case WSAEADDRNOTAVAIL: /* Remote address is not valid (WSASentTo). */
+      DDS_WARNING("slortez: WSAEADDRNOTAVAIL (or fall through from WSAEFAULT)");
     case WSAEAFNOSUPPORT: /* Remote address is in wrong family (WSASentTo). */
+      DDS_WARNING("slortez: WSAEAFNOSUPPORT (or fall through from WSAEADDRNOTAVAIL)");
       return DDS_RETCODE_BAD_PARAMETER;
     case WSAENETRESET: /* Time to live expired. */
     case WSAEHOSTUNREACH: /* Host is unreachable. */
